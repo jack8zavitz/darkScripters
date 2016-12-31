@@ -6,9 +6,12 @@
 #There is also the unichr function, returning the Unicode character
 #whose ordinal is the unichr argument:
 
-
+#global vars
+#Guarda a ultima string codificada durante a execução do programa
+lastEncoded = []
 
 def encodeString(frase):
+    #gera uma lista com listas
     splitted = list(frase)
     converted_to_ASCII = []
     for word in splitted:
@@ -34,7 +37,7 @@ def decodeString(frase):
 ###############################################################
 print ("Please choose one of the following options:")
 print ("\t1)Insert message here")
-print ("\t2)You can put the path to the especific txt file that you want to encode")
+print ("\t2)You can put the path to the especific text file that you want to encode")
 
 option = input("Option: ")
 
@@ -44,17 +47,23 @@ while option != "1" and option !="2":
     print("Please write 1 or 2 dumbass")
     print ("Option:")
     option=input()
-###############################################################
+#############ENCRIPT FROM TEXT MESSAGE################
 if option =="1":
     print("Please write what you want to encript:")
+    encodedFromText = []
     text=input()
+    encodedFromText += encodeString(text)
+    lastEncoded = encodeString(text)
     print (encodeString(text))
 
-    
+#############ENCRIPT FROM FILE STRING################
 else:
     path=input("Please write the path to you text file: ")
+    encodedWithPath = []
     with open(path, "r+") as file:
         for line in file:
+            encodedWithPath += encodeString(line)
+            lastEncoded += encodeString(line)
             print (encodeString(line))
     file.close()
     
